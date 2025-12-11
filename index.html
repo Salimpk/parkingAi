@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام المواقف الذكي المتطور</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Roboto:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #3498db;
+            --success-color: #76ff03;
+            --danger-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --asphalt-color: #383838;
+            --line-color: rgba(255, 255, 255, 0.6);
+            --bg-color: #eef2f3;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --header-bg: #2c3e50;
+            --notification-bg: #ffffff;
+            --transition-speed: 0.3s;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #1a2530;
+            --secondary-color: #4a9fdb;
+            --success-color: #76ff03;
+            --danger-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #eef2f3;
+            --asphalt-color: #282828;
+            --line-color: rgba(255, 255, 255, 0.6);
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #f0f0f0;
+            --header-bg: #1a1a1a;
+            --notification-bg: #2a2a2a;
+        }
+        
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+        
+        body {
+            font-family: 'Tajawal', 'Roboto', 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color); /* Ensures main text color is dynamic */
+            line-height: 1.6;
+        }
+        
+        .container { 
+            width: 100%; 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            padding: 20px; 
+        }
+        
+        header {
+            background-color: var(--header-bg);
+            color: white; /* Header text stays white */
+            padding: 15px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: sticky; 
+            top: 0; 
+            z-index: 100;
+            margin-bottom: 30px;
+        }
+        
+        .header-content { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            flex-wrap: wrap;
+        }
+        
+        .logo { 
+            display: flex; 
+            align-items: center; 
+            font-size: 22px; 
+            font-weight: 700; 
+        }
+        
+        .logo i { 
+            margin-left: 10px; 
+            color: var(--success-color); 
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .status-info { 
+            display: flex; 
+            gap: 15px; 
+        }
+        
+        .status-item { 
+            background: rgba(255,255,255,0.15); 
+            padding: 5px 15px; 
+            border-radius: 50px;
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+            font-size: 14px;
+            color: white; /* Status text stays white */
+        }
+        
+        .status-value { 
+            font-weight: 700; 
+            font-size: 16px; 
+            color: var(--success-color); 
+        }
+
+        /* Language and Theme Switcher */
+        .control-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .language-switcher, .theme-switcher {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+        
+        .language-switcher:hover, .theme-switcher:hover {
+            background: rgba(255,255,255,0.25);
+        }
+        
+        .language-dropdown {
+            position: relative;
+        }
+        
+        .language-options {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--card-bg);
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 5px;
+            display: none;
+            z-index: 1000;
+            min-width: 120px;
+        }
+        
+        .language-options.show {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-color);
+        }
+        
+        .language-option:hover {
+            background: rgba(0,0,0,0.1);
+        }
+        
+        .language-option.active {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        /* --- الشبكة المرنة للمواقف --- */
+        .parking-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            padding-bottom: 50px;
+        }
+
+        /* تصميم الممر الواحد */
+        .parking-lane {
+            position: relative;
+            width: 280px;
+            background-color: var(--asphalt-color);
+            border-radius: 15px;
+            border: 3px solid #555;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer; /* Add cursor to indicate it's clickable */
+        }
+        
+        .parking-lane:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .lane-header {
+            position: absolute;
+            top: 0; 
+            left: 0; 
+            right: 0;
+            background: rgba(0,0,0,0.5);
+            color: #aaa;
+            font-size: 12px;
+            text-align: center;
+            padding: 5px;
+            z-index: 20;
+            pointer-events: none; /* Prevents header from capturing click events */
+        }
+
+        .lane-road-line {
+            position: absolute;
+            top: 0; 
+            bottom: 0; 
+            left: 50%;
+            width: 0;
+            border-left: 2px dashed #777;
+            transform: translateX(-1px);
+        }
+
+        .lane-arrow {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.2);
+            font-size: 20px;
+            z-index: 1;
+        }
+        
+        .lane-arrow.up { 
+            top: 40px; 
+        }
+        
+        .lane-arrow.down { 
+            bottom: 20px; 
+            transform: translateX(-50%) rotate(180deg); 
+        }
+
+        .parking-space {
+            position: absolute;
+            width: 60px;
+            height: 40px;
+            border: 2px solid rgba(255,255,255,0.7);
+            border-radius: 6px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 10;
+        }
+
+        .parking-space.free {
+            background-color: rgba(118, 255, 3, 0.2);
+            border-color: var(--success-color);
+            box-shadow: inset 0 0 15px var(--success-color), 0 0 10px var(--success-color);
+        }
+        
+        .parking-space.occupied {
+            background-color: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.3);
+            color: #fff;
+        }
+
+        .parking-space i {
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+        }
+        
+        /* --- Zoom Modal Styles --- */
+        .zoom-modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+            padding-top: 50px;
+        }
+
+        .zoom-modal-content {
+            position: relative;
+            background-color: var(--card-bg);
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #888;
+            width: 100%;
+            max-width: 1400px;
+            border-radius: 15px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+            max-height: 90vh;
+            overflow: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: var(--text-color);
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-modal:hover,
+        .close-modal:focus {
+            color: var(--danger-color);
+        }
+
+        #zoomed-lane-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            min-height: 600px;
+            padding: 40px 20px;
+        }
+
+        #zoomed-lane-container .parking-lane {
+            transform: scale(1.3); /* تكبير القسم */
+            cursor: default; /* Not clickable inside modal */
+            transform-origin: center center;
+            position: relative;
+            margin: 0 auto;
+        }
+        
+        /* --- Bottom Stats --- */
+        .bottom-stats {
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            right: 0;
+            background: var(--card-bg);
+            padding: 15px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 200;
+        }
+        
+        .progress-container { 
+            width: 40%; 
+        }
+        
+        .progress-bar { 
+            width: 100%; 
+            height: 10px; 
+            background: #eee; 
+            border-radius: 10px; 
+            overflow: hidden; 
+            display: flex; 
+        }
+        
+        .prog-free { 
+            background: var(--success-color); 
+            height: 100%; 
+            transition: width 0.5s; 
+        }
+        
+        .prog-busy { 
+            background: var(--danger-color); 
+            height: 100%; 
+            transition: width 0.5s; 
+        }
+
+        /* --- Notification --- */
+        .notification {
+            position: fixed; 
+            top: 100px; 
+            left: 20px;
+            background: var(--notification-bg); 
+            padding: 15px 25px; 
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-right: 5px solid var(--success-color);
+            transform: translateX(-150%);
+            transition: transform 0.4s ease;
+            z-index: 1000;
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+            max-width: 80%;
+        }
+        
+        .notification.show { 
+            transform: translateX(0); 
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .parking-lane { width: 240px; }
+            .parking-space { width: 50px; height: 35px; }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; gap: 15px; }
+            .parking-lane { width: 200px; }
+            .parking-space { width: 45px; height: 30px; font-size: 16px; }
+            .bottom-stats { flex-direction: column; gap: 10px; }
+            .progress-container { width: 100%; }
+        }
+        
+        @media (max-width: 480px) {
+            .container { padding: 10px; }
+            .parking-container { gap: 15px; }
+            .parking-lane { width: 160px; }
+            .parking-space { width: 40px; height: 25px; font-size: 14px; }
+            .status-item { padding: 3px 10px; font-size: 12px; }
+            .status-value { font-size: 14px; }
+            .logo { font-size: 18px; }
+        }
+        
+        /* LTR Support */
+        [dir="ltr"] .logo i { margin-right: 10px; margin-left: 0; }
+        [dir="ltr"] .language-options { right: auto; left: 0; }
+        [dir="ltr"] .notification { left: auto; right: 20px; border-right: none; border-left: 5px solid var(--success-color); transform: translateX(150%); }
+        [dir="ltr"] .notification.show { transform: translateX(0); }
+        [dir="ltr"] .close-modal { right: auto; left: 35px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-parking"></i>
+                <span data-i18n="app-title">الموقف الذكي</span>
+                <small style="font-size: 12px; opacity: 0.8" data-i18n="app-subtitle">نظام متعدد الممرات</small>
+            </div>
+            
+            <div class="header-controls">
+                <div class="status-info">
+                    <div class="status-item">
+                        <span data-i18n="total">الكلي:</span>
+                        <span class="status-value" id="total-spaces">0</span>
+                    </div>
+                    <div class="status-item">
+                        <span data-i18n="available">متاح:</span>
+                        <span class="status-value" id="free-spaces">0</span>
+                    </div>
+                </div>
+                
+                <div class="control-buttons">
+                    <div class="language-dropdown">
+                        <button class="language-switcher" id="language-btn">
+                            <i class="fas fa-globe"></i>
+                            <span id="current-lang">العربية</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="language-options" id="language-options">
+                            <div class="language-option active" data-lang="ar">
+                                <span>العربية</span>
+                            </div>
+                            <div class="language-option" data-lang="en">
+                                <span>English</span>
+                            </div>
+                            <div class="language-option" data-lang="fr">
+                                <span>Français</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="theme-switcher" id="theme-toggle">
+                        <i class="fas fa-moon" id="theme-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="parking-lot-container" class="parking-container">
+            <h3 style="width: 100%; text-align: center; color: #999;" data-i18n="loading">⏳ جاري تحميل المخطط...</h3>
+        </div>
+    </main>
+
+    <div class="bottom-stats">
+        <div>
+            <small data-i18n="last-update">آخر تحديث</small>
+            <div style="font-weight: bold;" id="last-update">--:--:--</div>
+        </div>
+        <div class="progress-container">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 12px;">
+                <span data-i18n="occupancy-rate">نسبة الإشغال</span>
+                <span id="occupancy-percent">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="prog-busy" id="prog-busy" style="width: 0%"></div>
+                <div class="prog-free" id="prog-free" style="width: 0%"></div>
+            </div>
+        </div>
+        <div>
+            <small data-i18n="status">الحالة</small>
+            <div style="font-weight: bold; color: var(--secondary-color);">
+                <span data-i18n="live">مباشر</span> <i class="fas fa-wifi"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        <i class="fas fa-bell"></i>
+        <span id="notification-message">مرحباً بك</span>
+    </div>
+
+    <!-- Zoom Modal -->
+    <div id="zoom-modal" class="zoom-modal">
+        <div class="zoom-modal-content">
+            <span class="close-modal">×</span>
+            <div id="zoomed-lane-container"></div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+
+    <script>
+        // Firebase config (replace with your actual config)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBxdRbrK3zSMWPZSWxXuFBX6plqDYpG244",
+            authDomain: "car-parking-space-detection.firebaseapp.com",
+            databaseURL: "https://car-parking-space-detection-default-rtdb.firebaseio.com",
+            projectId: "car-parking-space-detection",
+            storageBucket: "car-parking-space-detection.firebasestorage.app",
+            messagingSenderId: "712752824742",
+            appId: "1:712752824742:web:cf23ce0f5fb310e499cf67",
+            measurementId: "G-Q7V6KPX7RR"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // --- Translation System ---
+        const translations = {
+            ar: {
+                "app-title": "الموقف الذكي", "app-subtitle": "نظام متعدد الممرات", "total": "الكلي:", "available": "متاح:", "loading": "جاري تحميل المخطط...", "last-update": "آخر تحديث", "occupancy-rate": "نسبة الإشغال", "status": "الحالة", "live": "مباشر", "spot": "موقف", "free": "متاح", "occupied": "مشغول", "section": "قسم", "no-data": "لا توجد بيانات"
+            },
+            en: {
+                "app-title": "Smart Parking", "app-subtitle": "Multi-lane System", "total": "Total:", "available": "Available:", "loading": "Loading map...", "last-update": "Last Update", "occupancy-rate": "Occupancy Rate", "status": "Status", "live": "Live", "spot": "Spot", "free": "Free", "occupied": "Occupied", "section": "Section", "no-data": "No data available"
+            },
+            fr: {
+                "app-title": "Stationnement Intelligent", "app-subtitle": "Système Multi-voies", "total": "Total:", "available": "Disponible:", "loading": "Chargement de la carte...", "last-update": "Dernière Mise à Jour", "occupancy-rate": "Taux d'Occupation", "status": "Statut", "live": "En Direct", "spot": "Place", "free": "Libre", "occupied": "Occupé", "section": "Section", "no-data": "Aucune donnée disponible"
+            }
+        };
+
+        // --- Theme System ---
+        let currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        updateThemeIcon();
+
+        // --- Language System ---
+        let currentLang = localStorage.getItem('language') || 'ar';
+        document.documentElement.setAttribute('lang', currentLang);
+        document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+        updateLanguageUI();
+
+        // --- CONFIG ---
+        const CONFIG = { spotsPerLane: 12, spotHeight: 50, lanePaddingTop: 60, lanePaddingSide: 10 };
+
+        // --- DOM Elements ---
+        const containerEl = document.getElementById('parking-lot-container');
+        const notifEl = document.getElementById('notification');
+        const notifMsgEl = document.getElementById('notification-message');
+        const modal = document.getElementById('zoom-modal');
+        const modalContent = document.getElementById('zoomed-lane-container');
+        const closeModalBtn = document.querySelector('.close-modal');
+
+        // --- Event Listeners ---
+        document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+        document.getElementById('language-btn').addEventListener('click', toggleLanguageDropdown);
+        closeModalBtn.addEventListener('click', () => modal.style.display = 'none');
+        window.addEventListener('click', (event) => { if (event.target == modal) modal.style.display = 'none'; });
+        
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', function() { changeLanguage(this.getAttribute('data-lang')); });
+        });
+        
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('language-options');
+            const button = document.getElementById('language-btn');
+            if (!button.contains(event.target) && !dropdown.contains(event.target)) { dropdown.classList.remove('show'); }
+        });
+
+        // --- Functions ---
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('theme', currentTheme);
+            updateThemeIcon();
+        }
+
+        function updateThemeIcon() {
+            document.getElementById('theme-icon').className = currentTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+        }
+
+        function toggleLanguageDropdown() {
+            document.getElementById('language-options').classList.toggle('show');
+        }
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('language', lang);
+            document.documentElement.setAttribute('lang', lang);
+            document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+            updateLanguageUI();
+            
+            document.body.style.fontFamily = lang === 'ar' ? "'Tajawal', sans-serif" : (lang === 'fr' ? "'Poppins', sans-serif" : "'Roboto', sans-serif");
+            
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.classList.toggle('active', option.getAttribute('data-lang') === lang);
+            });
+            
+            const langNames = { 'ar': 'العربية', 'en': 'English', 'fr': 'Français' };
+            document.getElementById('current-lang').textContent = langNames[lang];
+            document.getElementById('language-options').classList.remove('show');
+            
+            // Refresh the parking map to apply new language
+            database.ref('parking').once('value').then((snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    const spacesList = Array.isArray(data.spaces) ? data.spaces : Object.values(data.spaces || {});
+                    renderSmartMap(spacesList);
+                }
+            });
+        }
+
+        function updateLanguageUI() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[currentLang][key]) { element.textContent = translations[currentLang][key]; }
+            });
+        }
+
+        function renderSmartMap(spaces) {
+            containerEl.innerHTML = '';
+            if (!spaces || spaces.length === 0) {
+                containerEl.innerHTML = `<h3 style="text-align:center; width:100%">${translations[currentLang]['no-data']}</h3>`;
+                return;
+            }
+            const totalLanes = Math.ceil(spaces.length / CONFIG.spotsPerLane);
+            for (let i = 0; i < totalLanes; i++) {
+                const laneEl = document.createElement('div');
+                laneEl.className = 'parking-lane';
+                
+                const spotsInThisLane = Math.min(CONFIG.spotsPerLane, spaces.length - (i * CONFIG.spotsPerLane));
+                const rowsNeeded = Math.ceil(spotsInThisLane / 2);
+                const laneHeight = (rowsNeeded * CONFIG.spotHeight) + CONFIG.lanePaddingTop + 40;
+                laneEl.style.height = `${laneHeight}px`;
+
+                const sectionName = currentLang === 'ar' ? `قسم ${String.fromCharCode(65 + i)}` : 
+                                   currentLang === 'fr' ? `Section ${String.fromCharCode(65 + i)}` : 
+                                   `Section ${String.fromCharCode(65 + i)}`;
+                
+                laneEl.innerHTML = `
+                    <div class="lane-header">${sectionName}</div>
+                    <div class="lane-road-line"></div>
+                    <div class="lane-arrow up"><i class="fas fa-arrow-up"></i></div>
+                    <div class="lane-arrow down"><i class="fas fa-arrow-up"></i></div>
+                `;
+
+                const startIndex = i * CONFIG.spotsPerLane;
+                const endIndex = startIndex + CONFIG.spotsPerLane;
+                const laneSpaces = spaces.slice(startIndex, endIndex);
+
+                laneSpaces.forEach((space, localIndex) => {
+                    const spaceEl = document.createElement('div');
+                    const statusClass = space.status && space.status.toUpperCase() === 'OCCUPIED' ? 'occupied' : 'free';
+                    spaceEl.className = `parking-space ${statusClass}`;
+                    
+                    if (statusClass === 'occupied') {
+                        // FIX: Apply transform only to the car icon
+                        spaceEl.innerHTML = `<i class="fas fa-car-side" style="transform: scaleX(-1);"></i>`;
+                    } else {
+                        spaceEl.innerHTML = `<small>${space.id + 1}</small>`;
+                        spaceEl.style.color = "var(--success-color)";
+                        spaceEl.style.fontWeight = "bold";
+                    }
+
+                    const isLeft = localIndex % 2 === 0; 
+                    const row = Math.floor(localIndex / 2);
+                    spaceEl.style.top = `${(row * CONFIG.spotHeight) + CONFIG.lanePaddingTop}px`;
+
+                    if (isLeft) {
+                        spaceEl.style.left = `${CONFIG.lanePaddingSide}px`;
+                    } else {
+                        spaceEl.style.right = `${CONFIG.lanePaddingSide}px`;
+                    }
+
+                    const spotText = currentLang === 'ar' ? 'موقف' : (currentLang === 'fr' ? 'Place' : 'Spot');
+                    const statusText = statusClass === 'free' ? translations[currentLang]['free'] : translations[currentLang]['occupied'];
+                    spaceEl.onclick = (e) => {
+                        e.stopPropagation(); // Prevents the lane click event
+                        showNotification(`${spotText} ${space.id + 1}: ${statusText}`);
+                    };
+
+                    laneEl.appendChild(spaceEl);
+                });
+
+                // Add click event to the lane itself for zooming
+                laneEl.onclick = (e) => {
+                    // If the click was on a parking space, do nothing (handled above)
+                    if (e.target.closest('.parking-space')) return;
+                    openZoomModal(laneEl);
+                };
+
+                containerEl.appendChild(laneEl);
+            }
+        }
+
+        function openZoomModal(laneElement) {
+            // Clone the entire lane element to preserve all styles and structure
+            const laneClone = laneElement.cloneNode(true);
+            
+            // إزالة محتوى المحتوى السابق
+            const container = document.getElementById('zoomed-lane-container');
+            container.innerHTML = '';
+            container.appendChild(laneClone);
+            
+            // Re-attach event listeners for spots inside the modal
+            laneClone.querySelectorAll('.parking-space').forEach(space => {
+                const spaceId = space.querySelector('small')?.textContent || '';
+                const statusClass = space.classList.contains('occupied') ? 'occupied' : 'free';
+                space.onclick = (e) => {
+                    e.stopPropagation();
+                    const spotText = currentLang === 'ar' ? 'موقف' : (currentLang === 'fr' ? 'Place' : 'Spot');
+                    const statusText = statusClass === 'occupied' ? translations[currentLang]['occupied'] : translations[currentLang]['free'];
+                    showNotification(`${spotText} ${spaceId}: ${statusText}`);
+                };
+            });
+            
+            modal.style.display = 'block';
+        }
+
+        function showNotification(msg) {
+            notifMsgEl.textContent = msg;
+            notifEl.classList.add('show');
+            setTimeout(() => notifEl.classList.remove('show'), 3000);
+        }
+
+        function updateStats(data) {
+            document.getElementById('total-spaces').textContent = data.total_spaces;
+            document.getElementById('free-spaces').textContent = data.free_spaces;
+            const busy = data.total_spaces - data.free_spaces;
+            const busyPercent = data.total_spaces > 0 ? Math.round((busy / data.total_spaces) * 100) : 0;
+            document.getElementById('occupancy-percent').textContent = `${busyPercent}%`;
+            document.getElementById('prog-busy').style.width = `${busyPercent}%`;
+            document.getElementById('prog-free').style.width = `${100 - busyPercent}%`;
+            
+            // Display the time - it's already a formatted string from Python
+            if (data.last_updated) {
+                document.getElementById('last-update').textContent = data.last_updated;
+            } else {
+                const now = new Date();
+                const locale = currentLang === 'ar' ? 'ar-SA' : (currentLang === 'fr' ? 'fr-FR' : 'en-US');
+                document.getElementById('last-update').textContent = now.toLocaleTimeString(locale);
+            }
+        }
+
+        // --- Firebase Listener ---
+        database.ref('parking').on('value', (snapshot) => {
+            const data = snapshot.val();
+            console.log('Firebase data received:', data); // لتتبع البيانات
+            if (data && data.spaces) {
+                const spacesList = Array.isArray(data.spaces) ? data.spaces : Object.values(data.spaces || {});
+                console.log(`✓ تم استقبال ${spacesList.length} موقف من Firebase`);
+                console.log(`📊 حالات المواقف:`, spacesList.map(s => ({ id: s.id, status: s.status })).slice(0, 10));
+                
+                // حساب المواقف الفارغة والمشغولة
+                const freeCount = spacesList.filter(s => s.status && s.status.toUpperCase() === 'FREE').length;
+                const occupiedCount = spacesList.filter(s => s.status && s.status.toUpperCase() === 'OCCUPIED').length;
+                console.log(`✓ Free: ${freeCount}, Occupied: ${occupiedCount}`);
+                
+                renderSmartMap(spacesList);
+                updateStats({
+                    total_spaces: data.total_spaces || spacesList.length,
+                    free_spaces: freeCount,
+                    occupied_spaces: occupiedCount,
+                    last_updated: data.last_updated || Date.now() / 1000, // Use current time if not provided
+                    timestamp: data.timestamp
+                });
+            } else {
+                console.warn('⚠️ لم يتم استقبال بيانات من Firebase');
+                containerEl.innerHTML = `<h3 style="text-align:center; width:100%; color: var(--danger-color);">⚠️ لم تتلقَّ بيانات من النظام</h3>`;
+            }
+        }, (error) => {
+            console.error('❌ خطأ في الاتصال بـ Firebase:', error);
+            containerEl.innerHTML = `<h3 style="text-align:center; width:100%; color: var(--danger-color);">❌ خطأ في الاتصال: ${error.message}</h3>`;
+        });
+
+        // Initialize language
+        changeLanguage(currentLang);
+    </script>
+</body>
+</html>
