@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نظام المواقف الذكي المتطور</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Roboto:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Roboto:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
@@ -39,84 +42,87 @@
             --header-bg: #1a1a1a;
             --notification-bg: #2a2a2a;
         }
-        
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             transition: background-color var(--transition-speed), color var(--transition-speed);
         }
-        
+
         body {
             font-family: 'Tajawal', 'Roboto', 'Poppins', sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-color); /* Ensures main text color is dynamic */
+            color: var(--text-color);
+            /* Ensures main text color is dynamic */
             line-height: 1.6;
         }
-        
-        .container { 
-            width: 100%; 
-            max-width: 1400px; 
-            margin: 0 auto; 
-            padding: 20px; 
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
         }
-        
+
         header {
             background-color: var(--header-bg);
-            color: white; /* Header text stays white */
+            color: white;
+            /* Header text stays white */
             padding: 15px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            position: sticky; 
-            top: 0; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
             z-index: 100;
             margin-bottom: 30px;
         }
-        
-        .header-content { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             flex-wrap: wrap;
         }
-        
-        .logo { 
-            display: flex; 
-            align-items: center; 
-            font-size: 22px; 
-            font-weight: 700; 
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 22px;
+            font-weight: 700;
         }
-        
-        .logo i { 
-            margin-left: 10px; 
-            color: var(--success-color); 
+
+        .logo i {
+            margin-left: 10px;
+            color: var(--success-color);
         }
-        
+
         .header-controls {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        
-        .status-info { 
-            display: flex; 
-            gap: 15px; 
+
+        .status-info {
+            display: flex;
+            gap: 15px;
         }
-        
-        .status-item { 
-            background: rgba(255,255,255,0.15); 
-            padding: 5px 15px; 
+
+        .status-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 5px 15px;
             border-radius: 50px;
-            display: flex; 
-            align-items: center; 
+            display: flex;
+            align-items: center;
             gap: 10px;
             font-size: 14px;
-            color: white; /* Status text stays white */
+            color: white;
+            /* Status text stays white */
         }
-        
-        .status-value { 
-            font-weight: 700; 
-            font-size: 16px; 
-            color: var(--success-color); 
+
+        .status-value {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--success-color);
         }
 
         /* Language and Theme Switcher */
@@ -124,9 +130,10 @@
             display: flex;
             gap: 10px;
         }
-        
-        .language-switcher, .theme-switcher {
-            background: rgba(255,255,255,0.15);
+
+        .language-switcher,
+        .theme-switcher {
+            background: rgba(255, 255, 255, 0.15);
             border: none;
             color: white;
             padding: 8px 12px;
@@ -137,32 +144,33 @@
             gap: 5px;
             font-size: 14px;
         }
-        
-        .language-switcher:hover, .theme-switcher:hover {
-            background: rgba(255,255,255,0.25);
+
+        .language-switcher:hover,
+        .theme-switcher:hover {
+            background: rgba(255, 255, 255, 0.25);
         }
-        
+
         .language-dropdown {
             position: relative;
         }
-        
+
         .language-options {
             position: absolute;
             top: 100%;
             right: 0;
             background: var(--card-bg);
             border-radius: 5px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             padding: 5px;
             display: none;
             z-index: 1000;
             min-width: 120px;
         }
-        
+
         .language-options.show {
             display: block;
         }
-        
+
         .language-option {
             padding: 8px 12px;
             cursor: pointer;
@@ -172,11 +180,11 @@
             gap: 8px;
             color: var(--text-color);
         }
-        
+
         .language-option:hover {
-            background: rgba(0,0,0,0.1);
+            background: rgba(0, 0, 0, 0.1);
         }
-        
+
         .language-option.active {
             background: var(--secondary-color);
             color: white;
@@ -199,35 +207,37 @@
             background-color: var(--asphalt-color);
             border-radius: 15px;
             border: 3px solid #555;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer; /* Add cursor to indicate it's clickable */
+            cursor: pointer;
+            /* Add cursor to indicate it's clickable */
         }
-        
-        .parking-lane:hover { 
-            transform: translateY(-5px); 
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+
+        .parking-lane:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         }
 
         .lane-header {
             position: absolute;
-            top: 0; 
-            left: 0; 
+            top: 0;
+            left: 0;
             right: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             color: #aaa;
             font-size: 12px;
             text-align: center;
             padding: 5px;
             z-index: 20;
-            pointer-events: none; /* Prevents header from capturing click events */
+            pointer-events: none;
+            /* Prevents header from capturing click events */
         }
 
         .lane-road-line {
             position: absolute;
-            top: 0; 
-            bottom: 0; 
+            top: 0;
+            bottom: 0;
             left: 50%;
             width: 0;
             border-left: 2px dashed #777;
@@ -238,25 +248,25 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            color: rgba(255,255,255,0.2);
+            color: rgba(255, 255, 255, 0.2);
             font-size: 20px;
             z-index: 1;
         }
-        
-        .lane-arrow.up { 
-            top: 40px; 
+
+        .lane-arrow.up {
+            top: 40px;
         }
-        
-        .lane-arrow.down { 
-            bottom: 20px; 
-            transform: translateX(-50%) rotate(180deg); 
+
+        .lane-arrow.down {
+            bottom: 20px;
+            transform: translateX(-50%) rotate(180deg);
         }
 
         .parking-space {
             position: absolute;
             width: 60px;
             height: 40px;
-            border: 2px solid rgba(255,255,255,0.7);
+            border: 2px solid rgba(255, 255, 255, 0.7);
             border-radius: 6px;
             display: flex;
             justify-content: center;
@@ -272,28 +282,35 @@
             border-color: var(--success-color);
             box-shadow: inset 0 0 15px var(--success-color), 0 0 10px var(--success-color);
         }
-        
+
         .parking-space.occupied {
-            background-color: rgba(255,255,255,0.05);
-            border-color: rgba(255,255,255,0.3);
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.3);
             color: #fff;
         }
 
         .parking-space i {
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
         }
-        
+
         /* --- Zoom Modal Styles --- */
         .zoom-modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1000;
+            /* Sit on top */
             left: 0;
             top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.8);
+            /* Black w/ opacity */
             padding-top: 50px;
         }
 
@@ -306,7 +323,7 @@
             width: 100%;
             max-width: 1400px;
             border-radius: 15px;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
             max-height: 90vh;
             overflow: auto;
             display: flex;
@@ -339,108 +356,407 @@
         }
 
         #zoomed-lane-container .parking-lane {
-            transform: scale(1.3); /* تكبير القسم */
-            cursor: default; /* Not clickable inside modal */
+            transform: scale(1.3);
+            /* تكبير القسم */
+            cursor: default;
+            /* Not clickable inside modal */
             transform-origin: center center;
             position: relative;
             margin: 0 auto;
         }
-        
+
         /* --- Bottom Stats --- */
         .bottom-stats {
-            position: fixed; 
-            bottom: 0; 
-            left: 0; 
+            position: fixed;
+            bottom: 0;
+            left: 0;
             right: 0;
             background: var(--card-bg);
             padding: 15px;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: space-around;
             align-items: center;
             z-index: 200;
         }
-        
-        .progress-container { 
-            width: 40%; 
+
+        .progress-container {
+            width: 40%;
         }
-        
-        .progress-bar { 
-            width: 100%; 
-            height: 10px; 
-            background: #eee; 
-            border-radius: 10px; 
-            overflow: hidden; 
-            display: flex; 
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
         }
-        
-        .prog-free { 
-            background: var(--success-color); 
-            height: 100%; 
-            transition: width 0.5s; 
+
+        .prog-free {
+            background: var(--success-color);
+            height: 100%;
+            transition: width 0.5s;
         }
-        
-        .prog-busy { 
-            background: var(--danger-color); 
-            height: 100%; 
-            transition: width 0.5s; 
+
+        .prog-busy {
+            background: var(--danger-color);
+            height: 100%;
+            transition: width 0.5s;
         }
 
         /* --- Notification --- */
         .notification {
-            position: fixed; 
-            top: 100px; 
+            position: fixed;
+            top: 100px;
             left: 20px;
-            background: var(--notification-bg); 
-            padding: 15px 25px; 
+            background: var(--notification-bg);
+            padding: 15px 25px;
             border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             border-right: 5px solid var(--success-color);
             transform: translateX(-150%);
             transition: transform 0.4s ease;
             z-index: 1000;
-            display: flex; 
-            align-items: center; 
+            display: flex;
+            align-items: center;
             gap: 10px;
             max-width: 80%;
         }
-        
-        .notification.show { 
-            transform: translateX(0); 
+
+        .notification.show {
+            transform: translateX(0);
         }
 
         /* Responsive Design */
         @media (max-width: 992px) {
-            .parking-lane { width: 240px; }
-            .parking-space { width: 50px; height: 35px; }
+            .parking-lane {
+                width: 240px;
+            }
+
+            .parking-space {
+                width: 50px;
+                height: 35px;
+            }
         }
-        
+
         @media (max-width: 768px) {
-            .header-content { flex-direction: column; gap: 15px; }
-            .parking-lane { width: 200px; }
-            .parking-space { width: 45px; height: 30px; font-size: 16px; }
-            .bottom-stats { flex-direction: column; gap: 10px; }
-            .progress-container { width: 100%; }
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .parking-lane {
+                width: 200px;
+            }
+
+            .parking-space {
+                width: 45px;
+                height: 30px;
+                font-size: 16px;
+            }
+
+            .bottom-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .progress-container {
+                width: 100%;
+            }
         }
-        
+
         @media (max-width: 480px) {
-            .container { padding: 10px; }
-            .parking-container { gap: 15px; }
-            .parking-lane { width: 160px; }
-            .parking-space { width: 40px; height: 25px; font-size: 14px; }
-            .status-item { padding: 3px 10px; font-size: 12px; }
-            .status-value { font-size: 14px; }
-            .logo { font-size: 18px; }
+            .container {
+                padding: 10px;
+            }
+
+            .parking-container {
+                gap: 15px;
+            }
+
+            .parking-lane {
+                width: 160px;
+            }
+
+            .parking-space {
+                width: 40px;
+                height: 25px;
+                font-size: 14px;
+            }
+
+            .status-item {
+                padding: 3px 10px;
+                font-size: 12px;
+            }
+
+            .status-value {
+                font-size: 14px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
         }
-        
+
         /* LTR Support */
-        [dir="ltr"] .logo i { margin-right: 10px; margin-left: 0; }
-        [dir="ltr"] .language-options { right: auto; left: 0; }
-        [dir="ltr"] .notification { left: auto; right: 20px; border-right: none; border-left: 5px solid var(--success-color); transform: translateX(150%); }
-        [dir="ltr"] .notification.show { transform: translateX(0); }
-        [dir="ltr"] .close-modal { right: auto; left: 35px; }
+        [dir="ltr"] .logo i {
+            margin-right: 10px;
+            margin-left: 0;
+        }
+
+        [dir="ltr"] .language-options {
+            right: auto;
+            left: 0;
+        }
+
+        [dir="ltr"] .notification {
+            left: auto;
+            right: 20px;
+            border-right: none;
+            border-left: 5px solid var(--success-color);
+            transform: translateX(150%);
+        }
+
+        [dir="ltr"] .notification.show {
+            transform: translateX(0);
+        }
+
+        [dir="ltr"] .close-modal {
+            right: auto;
+            left: 35px;
+        }
+
+        /* Live Stream Styles */
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        #live-stream-img {
+            max-height: 480px;
+            object-fit: contain;
+        }
+
+        @media (max-width: 768px) {
+            #live-stream-img {
+                max-height: 300px;
+            }
+        }
+
+        /* --- Map Parking View Styles --- */
+        /* Mobile Optimizations */
+        @media (max-width: 600px) {
+
+            html,
+            body {
+                overflow-x: hidden;
+                width: 100%;
+            }
+
+            .container {
+                padding: 5px;
+                width: 100%;
+                overflow-x: hidden;
+            }
+
+            .parking-map-wrapper {
+                padding: 5px;
+                overflow-x: hidden;
+            }
+
+            .parking-container {
+                border-radius: 8px;
+                margin: 10px auto;
+                width: 100%;
+                overflow-x: hidden;
+            }
+
+            header {
+                padding: 10px 0;
+                margin-bottom: 20px;
+                width: 100%;
+                overflow-x: hidden;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .status-info {
+                width: 100%;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            .control-buttons {
+                width: 100%;
+                justify-content: center;
+                gap: 6px;
+                flex-wrap: wrap;
+            }
+
+            .language-switcher,
+            .theme-switcher,
+            #view-toggle {
+                padding: 8px 10px;
+                font-size: 12px;
+                min-width: 38px;
+                height: 34px;
+            }
+
+            .language-switcher i:last-child,
+            #view-text {
+                display: none;
+            }
+
+            .logo {
+                font-size: 16px;
+            }
+        }
+
+        .parking-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            overflow-x: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: var(--card-bg);
+            box-sizing: border-box;
+        }
+
+        .parking-map-wrapper {
+            position: relative;
+            width: 100%;
+            display: flex;
+            /* Center the SVG */
+            justify-content: center;
+            background-color: var(--asphalt-color);
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+
+        .parking-overlay {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            /* Prevent it from being too tall */
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Car Animation */
+        @keyframes carAppear {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            80% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .car-icon-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            animation: carAppear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Badge Styles matching the user photo */
+        .parking-badge-group {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .parking-badge-group:hover {
+            transform: scale(1.1);
+        }
+
+        .parking-badge-rect {
+            rx: 12;
+            ry: 12;
+            stroke-width: 2;
+            transition: all 0.3s ease;
+        }
+
+        /* Occupied: Dark grey with lighter stroke */
+        .parking-badge-rect.occupied {
+            fill: rgba(40, 40, 40, 0.9);
+            stroke: #666;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+        }
+
+        /* Free: Neon Green filled/glow */
+        .parking-badge-rect.free {
+            fill: rgba(118, 255, 3, 0.85);
+            /* Bright Green */
+            stroke: #fff;
+            stroke-width: 2;
+            filter: drop-shadow(0 0 8px rgba(118, 255, 3, 0.6));
+        }
+
+        .parking-badge-text {
+            font-size: 18px;
+            font-weight: 800;
+            fill: white;
+            text-anchor: middle;
+            dominant-baseline: middle;
+            font-family: 'Roboto', sans-serif;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Make the underlying polygon invisible but keep it for reference if needed */
+        .parking-spot-polygon {
+            fill: transparent;
+            stroke: rgba(255, 255, 255, 0.1);
+            stroke-width: 1;
+            pointer-events: none;
+            /* Let clicks pass to the badge if they overlap, or handle click on polygon too? */
+        }
+
+        /* Old Polygon styles removed or kept for reference if needed, but we use .parking-spot-rect now */
+        .parking-polygon {
+            display: none;
+        }
+
+        .parking-polygon.occupied:hover {
+            filter: drop-shadow(0 0 5px var(--danger-color));
+        }
+
+        .parking-label {
+            font-size: 12px;
+            font-weight: bold;
+            fill: white;
+            text-shadow: 0 0 3px black;
+            pointer-events: none;
+        }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -450,7 +766,7 @@
                 <span data-i18n="app-title">الموقف الذكي</span>
                 <small style="font-size: 12px; opacity: 0.8" data-i18n="app-subtitle">نظام متعدد الممرات</small>
             </div>
-            
+
             <div class="header-controls">
                 <div class="status-info">
                     <div class="status-item">
@@ -462,27 +778,20 @@
                         <span class="status-value" id="free-spaces">0</span>
                     </div>
                 </div>
-                
+
                 <div class="control-buttons">
-                    <div class="language-dropdown">
-                        <button class="language-switcher" id="language-btn">
-                            <i class="fas fa-globe"></i>
-                            <span id="current-lang">العربية</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="language-options" id="language-options">
-                            <div class="language-option active" data-lang="ar">
-                                <span>العربية</span>
-                            </div>
-                            <div class="language-option" data-lang="en">
-                                <span>English</span>
-                            </div>
-                            <div class="language-option" data-lang="fr">
-                                <span>Français</span>
-                            </div>
-                        </div>
-                    </div>
-                    
+                    <button class="theme-switcher text-button" id="language-toggle" title="Switch Language"
+                        style="font-weight:bold; width: auto; min-width: 45px;">
+                        <span id="lang-text">AR</span>
+                    </button>
+
+                    <button class="theme-switcher" id="btn-view-map" title="Map View">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </button>
+                    <button class="theme-switcher" id="btn-view-grid" title="Grid View">
+                        <i class="fas fa-th-large"></i>
+                    </button>
+
                     <button class="theme-switcher" id="theme-toggle">
                         <i class="fas fa-moon" id="theme-icon"></i>
                     </button>
@@ -492,6 +801,44 @@
     </header>
 
     <main class="container">
+        <!-- Live Video Stream Section -->
+        <div id="live-stream-section" style="margin-bottom: 20px; display: none;">
+            <div
+                style="background: var(--card-bg); border-radius: 15px; padding: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="color: var(--text-primary); margin: 0;">
+                        <i class="fas fa-video" style="color: var(--danger-color);"></i>
+                        <span data-i18n="live-video">البث المباشر</span>
+                    </h3>
+                    <button id="toggle-stream-btn"
+                        style="background: var(--danger-color); color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold;">
+                        <i class="fas fa-eye-slash"></i>
+                        <span data-i18n="hide-stream">إخفاء</span>
+                    </button>
+                </div>
+                <div id="live-stream-container"
+                    style="position: relative; background: #000; border-radius: 10px; overflow: hidden; max-width: 100%; margin: 0 auto;">
+                    <img id="live-stream-img" src="" alt="Live Stream"
+                        style="width: 100%; height: auto; display: block;">
+                    <div id="stream-status"
+                        style="position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px;">
+                        <i class="fas fa-circle"
+                            style="color: var(--danger-color); animation: pulse 1.5s infinite;"></i>
+                        <span data-i18n="streaming">بث مباشر</span>
+                    </div>
+                    <div id="stream-time"
+                        style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px;">
+                        --:--:--
+                    </div>
+                    <div id="no-stream-message"
+                        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; text-align: center; display: none;">
+                        <i class="fas fa-video-slash" style="font-size: 48px; opacity: 0.5;"></i>
+                        <p data-i18n="no-stream">لا يوجد بث متاح حالياً</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div id="parking-lot-container" class="parking-container">
             <h3 style="width: 100%; text-align: center; color: #999;" data-i18n="loading">⏳ جاري تحميل المخطط...</h3>
         </div>
@@ -555,13 +902,13 @@
         // --- Translation System ---
         const translations = {
             ar: {
-                "app-title": "الموقف الذكي", "app-subtitle": "نظام متعدد الممرات", "total": "الكلي:", "available": "متاح:", "loading": "جاري تحميل المخطط...", "last-update": "آخر تحديث", "occupancy-rate": "نسبة الإشغال", "status": "الحالة", "live": "مباشر", "spot": "موقف", "free": "متاح", "occupied": "مشغول", "section": "قسم", "no-data": "لا توجد بيانات"
+                "app-title": "الموقف الذكي", "app-subtitle": "نظام متعدد الممرات", "total": "الكلي:", "available": "متاح:", "loading": "جاري تحميل المخطط...", "last-update": "آخر تحديث", "occupancy-rate": "نسبة الإشغال", "status": "الحالة", "live": "مباشر", "spot": "موقف", "free": "متاح", "occupied": "مشغول", "section": "قسم", "no-data": "لا توجد بيانات", "live-video": "البث المباشر", "hide-stream": "إخفاء", "show-stream": "عرض", "streaming": "بث مباشر", "no-stream": "لا يوجد بث متاح حالياً"
             },
             en: {
-                "app-title": "Smart Parking", "app-subtitle": "Multi-lane System", "total": "Total:", "available": "Available:", "loading": "Loading map...", "last-update": "Last Update", "occupancy-rate": "Occupancy Rate", "status": "Status", "live": "Live", "spot": "Spot", "free": "Free", "occupied": "Occupied", "section": "Section", "no-data": "No data available"
+                "app-title": "Smart Parking", "app-subtitle": "Multi-lane System", "total": "Total:", "available": "Available:", "loading": "Loading map...", "last-update": "Last Update", "occupancy-rate": "Occupancy Rate", "status": "Status", "live": "Live", "spot": "Spot", "free": "Free", "occupied": "Occupied", "section": "Section", "no-data": "No data available", "live-video": "Live Video", "hide-stream": "Hide", "show-stream": "Show", "streaming": "Live Streaming", "no-stream": "No stream available"
             },
             fr: {
-                "app-title": "Stationnement Intelligent", "app-subtitle": "Système Multi-voies", "total": "Total:", "available": "Disponible:", "loading": "Chargement de la carte...", "last-update": "Dernière Mise à Jour", "occupancy-rate": "Taux d'Occupation", "status": "Statut", "live": "En Direct", "spot": "Place", "free": "Libre", "occupied": "Occupé", "section": "Section", "no-data": "Aucune donnée disponible"
+                "app-title": "Stationnement Intelligent", "app-subtitle": "Système Multi-voies", "total": "Total:", "available": "Disponible:", "loading": "Chargement de la carte...", "last-update": "Dernière Mise à Jour", "occupancy-rate": "Taux d'Occupation", "status": "Statut", "live": "En Direct", "spot": "Place", "free": "Libre", "occupied": "Occupé", "section": "Section", "no-data": "Aucune donnée disponible", "live-video": "Vidéo en Direct", "hide-stream": "Masquer", "show-stream": "Afficher", "streaming": "Diffusion en Direct", "no-stream": "Aucun flux disponible"
             }
         };
 
@@ -576,8 +923,115 @@
         document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
         updateLanguageUI();
 
+        // --- PARKING MAP DATA ---
+        const PARKING_MAP_DATA = {
+            "aerial": {
+                "name": "Aerial View",
+                "image": "carParkImg.png",
+                "spots": [
+                    { "id": 0, "points": [[35, 90], [155, 90], [155, 138], [35, 138]] },
+                    { "id": 1, "points": [[161, 92], [253, 92], [253, 138], [161, 138]] },
+                    { "id": 2, "points": [[37, 144], [148, 144], [148, 190], [37, 190]] },
+                    { "id": 3, "points": [[154, 142], [281, 142], [281, 190], [154, 190]] },
+                    { "id": 4, "points": [[35, 198], [157, 198], [157, 238], [35, 238]] },
+                    { "id": 5, "points": [[161, 197], [273, 197], [273, 237], [161, 237]] },
+                    { "id": 6, "points": [[33, 242], [159, 242], [159, 286], [33, 286]] },
+                    { "id": 7, "points": [[161, 245], [268, 245], [268, 285], [161, 285]] },
+                    { "id": 8, "points": [[32, 292], [158, 292], [158, 336], [32, 336]] },
+                    { "id": 9, "points": [[160, 288], [265, 288], [265, 333], [160, 333]] },
+                    { "id": 10, "points": [[33, 339], [167, 339], [167, 380], [33, 380]] },
+                    { "id": 11, "points": [[163, 338], [265, 338], [265, 377], [163, 377]] },
+                    { "id": 12, "points": [[33, 384], [160, 384], [160, 430], [33, 430]] },
+                    { "id": 13, "points": [[163, 382], [265, 382], [265, 429], [163, 429]] },
+                    { "id": 14, "points": [[35, 434], [157, 434], [157, 473], [35, 473]] },
+                    { "id": 15, "points": [[164, 432], [260, 432], [260, 471], [164, 471]] },
+                    { "id": 16, "points": [[32, 480], [158, 480], [158, 526], [32, 526]] },
+                    { "id": 17, "points": [[165, 482], [265, 482], [265, 522], [165, 522]] },
+                    { "id": 18, "points": [[32, 531], [161, 531], [161, 569], [32, 569]] },
+                    { "id": 19, "points": [[165, 530], [269, 530], [269, 570], [165, 570]] },
+                    { "id": 20, "points": [[33, 575], [162, 575], [162, 616], [33, 616]] },
+                    { "id": 21, "points": [[164, 576], [266, 576], [266, 617], [164, 617]] },
+                    { "id": 22, "points": [[32, 617], [163, 617], [163, 674], [32, 674]] },
+                    { "id": 23, "points": [[165, 624], [259, 624], [259, 670], [165, 670]] },
+                    { "id": 24, "points": [[398, 97], [511, 97], [511, 137], [398, 137]] },
+                    { "id": 25, "points": [[515, 95], [615, 95], [615, 138], [515, 138]] },
+                    { "id": 26, "points": [[399, 143], [507, 143], [507, 182], [399, 182]] },
+                    { "id": 27, "points": [[514, 141], [616, 141], [616, 184], [514, 184]] },
+                    { "id": 28, "points": [[400, 191], [503, 191], [503, 231], [400, 231]] },
+                    { "id": 29, "points": [[512, 190], [617, 190], [617, 234], [512, 234]] },
+                    { "id": 30, "points": [[399, 238], [515, 238], [515, 281], [399, 281]] },
+                    { "id": 31, "points": [[515, 239], [621, 239], [621, 277], [515, 277]] },
+                    { "id": 32, "points": [[401, 288], [508, 288], [508, 329], [401, 329]] },
+                    { "id": 33, "points": [[512, 286], [621, 286], [621, 330], [512, 330]] },
+                    { "id": 34, "points": [[399, 332], [507, 332], [507, 378], [399, 378]] },
+                    { "id": 35, "points": [[515, 328], [621, 328], [621, 377], [515, 377]] },
+                    { "id": 36, "points": [[398, 382], [507, 382], [507, 423], [398, 423]] },
+                    { "id": 37, "points": [[513, 381], [621, 381], [621, 423], [513, 423]] },
+                    { "id": 38, "points": [[399, 430], [509, 430], [509, 471], [399, 471]] },
+                    { "id": 39, "points": [[515, 430], [617, 430], [617, 468], [515, 468]] },
+                    { "id": 40, "points": [[401, 525], [511, 525], [511, 565], [401, 565]] },
+                    { "id": 41, "points": [[515, 526], [621, 526], [621, 566], [515, 566]] },
+                    { "id": 42, "points": [[401, 570], [509, 570], [509, 614], [401, 614]] },
+                    { "id": 43, "points": [[514, 570], [634, 570], [634, 614], [514, 614]] },
+                    { "id": 44, "points": [[403, 619], [513, 619], [513, 664], [403, 664]] },
+                    { "id": 45, "points": [[517, 619], [630, 619], [630, 666], [517, 666]] },
+                    { "id": 46, "points": [[747, 84], [863, 84], [863, 134], [747, 134]] },
+                    { "id": 47, "points": [[747, 137], [867, 137], [867, 180], [747, 180]] },
+                    { "id": 48, "points": [[751, 184], [867, 184], [867, 226], [751, 226]] },
+                    { "id": 49, "points": [[744, 237], [880, 237], [880, 271], [744, 271]] },
+                    { "id": 50, "points": [[749, 284], [868, 284], [868, 324], [749, 324]] },
+                    { "id": 51, "points": [[750, 332], [856, 332], [856, 371], [750, 371]] },
+                    { "id": 52, "points": [[752, 382], [855, 382], [855, 422], [752, 422]] },
+                    { "id": 53, "points": [[755, 428], [869, 428], [869, 469], [755, 469]] },
+                    { "id": 54, "points": [[751, 480], [856, 480], [856, 516], [751, 516]] },
+                    { "id": 55, "points": [[757, 522], [864, 522], [864, 563], [757, 563]] },
+                    { "id": 56, "points": [[757, 568], [853, 568], [853, 607], [757, 607]] },
+                    { "id": 57, "points": [[755, 618], [862, 618], [862, 667], [755, 667]] },
+                    { "id": 58, "points": [[910, 148], [1004, 148], [1004, 182], [910, 182]] },
+                    { "id": 59, "points": [[899, 189], [1004, 189], [1004, 233], [899, 233]] },
+                    { "id": 60, "points": [[907, 237], [1009, 237], [1009, 276], [907, 276]] },
+                    { "id": 61, "points": [[909, 286], [1003, 286], [1003, 327], [909, 327]] },
+                    { "id": 62, "points": [[901, 329], [1009, 329], [1009, 374], [901, 374]] },
+                    { "id": 63, "points": [[899, 380], [1011, 380], [1011, 421], [899, 421]] },
+                    { "id": 64, "points": [[904, 428], [1014, 428], [1014, 468], [904, 468]] },
+                    { "id": 65, "points": [[913, 478], [1010, 478], [1010, 522], [913, 522]] },
+                    { "id": 66, "points": [[913, 528], [1008, 528], [1008, 569], [913, 569]] },
+                    { "id": 67, "points": [[914, 572], [1006, 572], [1006, 615], [914, 615]] },
+                    { "id": 68, "points": [[914, 617], [1007, 617], [1007, 658], [914, 658]] }
+                ],
+                "width": 0,
+                "height": 0
+            },
+            "close": {
+                "name": "Close View",
+                "image": "ROI_Reference.png",
+                "spots": [
+                    { "id": 0, "points": [[533, 360], [466, 315], [589, 196], [679, 221]] },
+                    { "id": 1, "points": [[472, 319], [418, 281], [531, 188], [592, 194]] },
+                    { "id": 2, "points": [[419, 286], [379, 259], [493, 177], [535, 188]] },
+                    { "id": 3, "points": [[208, 274], [80, 292], [98, 411], [265, 391]] },
+                    { "id": 4, "points": [[266, 392], [378, 591], [121, 628], [99, 411]] },
+                    { "id": 5, "points": [[81, 290], [74, 225], [165, 206], [210, 272]] },
+                    { "id": 6, "points": [[785, 511], [901, 308], [637, 218], [551, 381]] },
+                    { "id": 7, "points": [[791, 513], [911, 315], [973, 335], [891, 570]] },
+                    { "id": 8, "points": [[897, 572], [975, 335], [1048, 351], [992, 608]] },
+                    { "id": 9, "points": [[1055, 353], [996, 606], [1092, 638], [1122, 372]] },
+                    { "id": 10, "points": [[1124, 374], [1094, 642], [1188, 672], [1190, 396]] },
+                    { "id": 11, "points": [[1192, 396], [1196, 680], [1281, 712], [1249, 411]] },
+                    { "id": 12, "points": [[35, 240], [178, 219], [173, 175], [57, 189]] },
+                    { "id": 13, "points": [[54, 185], [171, 170], [165, 131], [46, 142]] },
+                    { "id": 14, "points": [[44, 139], [163, 126], [159, 89], [33, 99]] },
+                    { "id": 15, "points": [[249, 210], [338, 203], [335, 163], [248, 169]] },
+                    { "id": 16, "points": [[246, 167], [333, 161], [331, 125], [243, 130]] },
+                    { "id": 17, "points": [[242, 127], [328, 121], [323, 86], [240, 93]] }
+                ]
+            }
+        };
+
         // --- CONFIG ---
         const CONFIG = { spotsPerLane: 12, spotHeight: 50, lanePaddingTop: 60, lanePaddingSide: 10 };
+        let currentViewMode = localStorage.getItem('viewMode') || 'grid';
+        let lastSpaces = []; // Store data for immediate view switching
 
         // --- DOM Elements ---
         const containerEl = document.getElementById('parking-lot-container');
@@ -589,19 +1043,11 @@
 
         // --- Event Listeners ---
         document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
-        document.getElementById('language-btn').addEventListener('click', toggleLanguageDropdown);
+        document.getElementById('language-toggle').addEventListener('click', cycleLanguage);
+        document.getElementById('btn-view-map').addEventListener('click', () => switchView('map'));
+        document.getElementById('btn-view-grid').addEventListener('click', () => switchView('grid'));
         closeModalBtn.addEventListener('click', () => modal.style.display = 'none');
         window.addEventListener('click', (event) => { if (event.target == modal) modal.style.display = 'none'; });
-        
-        document.querySelectorAll('.language-option').forEach(option => {
-            option.addEventListener('click', function() { changeLanguage(this.getAttribute('data-lang')); });
-        });
-        
-        document.addEventListener('click', function(event) {
-            const dropdown = document.getElementById('language-options');
-            const button = document.getElementById('language-btn');
-            if (!button.contains(event.target) && !dropdown.contains(event.target)) { dropdown.classList.remove('show'); }
-        });
 
         // --- Functions ---
         function toggleTheme() {
@@ -615,8 +1061,11 @@
             document.getElementById('theme-icon').className = currentTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
         }
 
-        function toggleLanguageDropdown() {
-            document.getElementById('language-options').classList.toggle('show');
+        function cycleLanguage() {
+            const displayLangs = ['ar', 'en', 'fr'];
+            const currentIndex = displayLangs.indexOf(currentLang);
+            const nextIndex = (currentIndex + 1) % displayLangs.length;
+            changeLanguage(displayLangs[nextIndex]);
         }
 
         function changeLanguage(lang) {
@@ -625,17 +1074,13 @@
             document.documentElement.setAttribute('lang', lang);
             document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
             updateLanguageUI();
-            
+
             document.body.style.fontFamily = lang === 'ar' ? "'Tajawal', sans-serif" : (lang === 'fr' ? "'Poppins', sans-serif" : "'Roboto', sans-serif");
-            
-            document.querySelectorAll('.language-option').forEach(option => {
-                option.classList.toggle('active', option.getAttribute('data-lang') === lang);
-            });
-            
-            const langNames = { 'ar': 'العربية', 'en': 'English', 'fr': 'Français' };
-            document.getElementById('current-lang').textContent = langNames[lang];
-            document.getElementById('language-options').classList.remove('show');
-            
+
+            // Update Toggle Button Text
+            const langText = document.getElementById('lang-text');
+            if (langText) langText.textContent = lang.toUpperCase();
+
             // Refresh the parking map to apply new language
             database.ref('parking').once('value').then((snapshot) => {
                 const data = snapshot.val();
@@ -653,8 +1098,174 @@
             });
         }
 
+        // --- View Logic ---
+        function switchView(mode) {
+            currentViewMode = mode;
+            localStorage.setItem('viewMode', mode);
+
+            // Update Button States
+            document.getElementById('btn-view-map').style.background = mode === 'map' ? 'var(--success-color)' : '';
+            document.getElementById('btn-view-grid').style.background = mode === 'grid' ? 'var(--success-color)' : '';
+            document.getElementById('btn-view-map').style.color = mode === 'map' ? '#000' : 'white';
+            document.getElementById('btn-view-grid').style.color = mode === 'grid' ? '#000' : 'white';
+
+            // Immediate re-render if we have data
+            if (lastSpaces && lastSpaces.length > 0) {
+                renderSmartMap(lastSpaces);
+            }
+        }
+
         function renderSmartMap(spaces) {
+            // Handle View Dispatching
+            if (currentViewMode === 'map') {
+                renderSVGMap(spaces);
+            } else {
+                renderGridMap(spaces);
+            }
+
+            // Update buttons active state on render as well, to ensure consistency on load
+            document.getElementById('btn-view-map').style.background = currentViewMode === 'map' ? 'var(--success-color)' : '';
+            document.getElementById('btn-view-grid').style.background = currentViewMode === 'grid' ? 'var(--success-color)' : '';
+            document.getElementById('btn-view-map').style.color = currentViewMode === 'map' ? '#000' : 'white';
+            document.getElementById('btn-view-grid').style.color = currentViewMode === 'grid' ? '#000' : 'white';
+        }
+
+        function renderSVGMap(spaces) {
             containerEl.innerHTML = '';
+
+            // Check if map data is available
+            if (typeof PARKING_MAP_DATA === 'undefined' || !PARKING_MAP_DATA || !PARKING_MAP_DATA['aerial']) {
+                console.warn('⚠️ Map data missing, falling back to grid');
+                renderGridMap(spaces);
+                return;
+            }
+
+            // Auto-detect Map Type
+            let mapType = 'aerial';
+            if (spaces.length <= 40) mapType = 'close';
+
+            const mapData = PARKING_MAP_DATA[mapType];
+            if (!mapData) {
+                renderGridMap(spaces);
+                return;
+            }
+
+            // Create Wrapper
+            const wrapper = document.createElement('div');
+            wrapper.className = 'parking-map-wrapper';
+
+            // Create SVG Overlay
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.className = 'parking-overlay';
+
+            // Calculate Bounding Box
+            let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+            mapData.spots.forEach(mapSpot => {
+                mapSpot.points.forEach(p => {
+                    const x = p[0];
+                    const y = p[1];
+                    if (x < minX) minX = x;
+                    if (y < minY) minY = y;
+                    if (x > maxX) maxX = x;
+                    if (y > maxY) maxY = y;
+                });
+            });
+
+            const PADDING = 20;
+            minX -= PADDING;
+            minY -= PADDING;
+            maxX += PADDING;
+            maxY += PADDING;
+            const viewBoxWidth = maxX - minX;
+            const viewBoxHeight = maxY - minY;
+
+            svg.setAttribute('viewBox', `${minX} ${minY} ${viewBoxWidth} ${viewBoxHeight}`);
+
+            // Render Spots
+            mapData.spots.forEach(mapSpot => {
+                let parkingStatus = 'FREE';
+                const liveSpot = spaces.find(s => s.id === mapSpot.id);
+                if (liveSpot && liveSpot.status) {
+                    parkingStatus = liveSpot.status.toUpperCase();
+                } else if (spaces[mapSpot.id]) {
+                    if (spaces[mapSpot.id].status) parkingStatus = spaces[mapSpot.id].status.toUpperCase();
+                }
+
+                const centroidX = mapSpot.points.reduce((acc, val) => acc + val[0], 0) / mapSpot.points.length;
+                const centroidY = mapSpot.points.reduce((acc, val) => acc + val[1], 0) / mapSpot.points.length;
+
+                // 1. Invisible Polygon
+                const polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+                const pointsStr = mapSpot.points.map(p => `${p[0]},${p[1]}`).join(" ");
+                polygon.setAttribute("points", pointsStr);
+                polygon.setAttribute("class", "parking-spot-polygon");
+                svg.appendChild(polygon);
+
+                // 2. Badge
+                const badgeGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                badgeGroup.setAttribute("class", "parking-badge-group");
+
+                const badgeW = 60;
+                const badgeH = 35;
+                const badgeX = centroidX - (badgeW / 2);
+                const badgeY = centroidY - (badgeH / 2);
+
+                const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                rect.setAttribute("x", badgeX);
+                rect.setAttribute("y", badgeY);
+                rect.setAttribute("width", badgeW);
+                rect.setAttribute("height", badgeH);
+
+                const statusClass = parkingStatus === 'OCCUPIED' ? 'occupied' : 'free';
+                rect.setAttribute("class", `parking-badge-rect ${statusClass}`);
+                badgeGroup.appendChild(rect);
+
+                // Content
+                if (statusClass === 'occupied') {
+                    const carSize = 24;
+                    const fo = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
+                    fo.setAttribute("x", centroidX - (carSize / 2));
+                    fo.setAttribute("y", centroidY - (carSize / 2));
+                    fo.setAttribute("width", carSize);
+                    fo.setAttribute("height", carSize);
+                    fo.style.pointerEvents = "none";
+                    const div = document.createElement("div");
+                    div.className = "car-icon-container";
+                    div.innerHTML = '<i class="fas fa-car-side"></i>';
+                    fo.appendChild(div);
+                    badgeGroup.appendChild(fo);
+                } else {
+                    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                    text.setAttribute("x", centroidX);
+                    text.setAttribute("y", centroidY + 1);
+                    text.setAttribute("class", "parking-badge-text");
+                    text.textContent = mapSpot.id + 1;
+                    badgeGroup.appendChild(text);
+                }
+
+                // Interactivity
+                badgeGroup.onclick = (e) => {
+                    e.stopPropagation();
+                    const spotText = currentLang === 'ar' ? 'موقف' : (currentLang === 'fr' ? 'Place' : 'Spot');
+                    const statusText = statusClass === 'free' ? translations[currentLang]['free'] : translations[currentLang]['occupied'];
+                    showNotification(`${spotText} ${mapSpot.id + 1}: ${statusText}`);
+                };
+
+                svg.appendChild(badgeGroup);
+            });
+
+            wrapper.appendChild(svg);
+            containerEl.appendChild(wrapper);
+        }
+
+        function renderGridMap(spaces) {
+            containerEl.innerHTML = ''; // FIX: Clear container first
+            containerEl.style.display = 'flex';
+            containerEl.style.flexWrap = 'wrap';
+            containerEl.style.justifyContent = 'center';
+            containerEl.style.gap = '30px';
+            containerEl.style.background = 'transparent'; // Remove asphalt background
+
             if (!spaces || spaces.length === 0) {
                 containerEl.innerHTML = `<h3 style="text-align:center; width:100%">${translations[currentLang]['no-data']}</h3>`;
                 return;
@@ -663,16 +1274,25 @@
             for (let i = 0; i < totalLanes; i++) {
                 const laneEl = document.createElement('div');
                 laneEl.className = 'parking-lane';
-                
+                // Grid specific styles restored
+                laneEl.style.position = 'relative';
+                laneEl.style.width = '280px';
+                laneEl.style.background = 'var(--asphalt-color)';
+                laneEl.style.borderRadius = '10px';
+                laneEl.style.border = '2px dashed #fff';
+                laneEl.style.boxShadow = '0 10px 20px rgba(0,0,0,0.2)';
+                laneEl.style.cursor = 'zoom-in';
+
+
                 const spotsInThisLane = Math.min(CONFIG.spotsPerLane, spaces.length - (i * CONFIG.spotsPerLane));
                 const rowsNeeded = Math.ceil(spotsInThisLane / 2);
                 const laneHeight = (rowsNeeded * CONFIG.spotHeight) + CONFIG.lanePaddingTop + 40;
                 laneEl.style.height = `${laneHeight}px`;
 
-                const sectionName = currentLang === 'ar' ? `قسم ${String.fromCharCode(65 + i)}` : 
-                                   currentLang === 'fr' ? `Section ${String.fromCharCode(65 + i)}` : 
-                                   `Section ${String.fromCharCode(65 + i)}`;
-                
+                const sectionName = currentLang === 'ar' ? `قسم ${String.fromCharCode(65 + i)}` :
+                    currentLang === 'fr' ? `Section ${String.fromCharCode(65 + i)}` :
+                        `Section ${String.fromCharCode(65 + i)}`;
+
                 laneEl.innerHTML = `
                     <div class="lane-header">${sectionName}</div>
                     <div class="lane-road-line"></div>
@@ -688,7 +1308,7 @@
                     const spaceEl = document.createElement('div');
                     const statusClass = space.status && space.status.toUpperCase() === 'OCCUPIED' ? 'occupied' : 'free';
                     spaceEl.className = `parking-space ${statusClass}`;
-                    
+
                     if (statusClass === 'occupied') {
                         // FIX: Apply transform only to the car icon
                         spaceEl.innerHTML = `<i class="fas fa-car-side" style="transform: scaleX(-1);"></i>`;
@@ -698,7 +1318,7 @@
                         spaceEl.style.fontWeight = "bold";
                     }
 
-                    const isLeft = localIndex % 2 === 0; 
+                    const isLeft = localIndex % 2 === 0;
                     const row = Math.floor(localIndex / 2);
                     spaceEl.style.top = `${(row * CONFIG.spotHeight) + CONFIG.lanePaddingTop}px`;
 
@@ -732,12 +1352,12 @@
         function openZoomModal(laneElement) {
             // Clone the entire lane element to preserve all styles and structure
             const laneClone = laneElement.cloneNode(true);
-            
+
             // إزالة محتوى المحتوى السابق
             const container = document.getElementById('zoomed-lane-container');
             container.innerHTML = '';
             container.appendChild(laneClone);
-            
+
             // Re-attach event listeners for spots inside the modal
             laneClone.querySelectorAll('.parking-space').forEach(space => {
                 const spaceId = space.querySelector('small')?.textContent || '';
@@ -749,7 +1369,7 @@
                     showNotification(`${spotText} ${spaceId}: ${statusText}`);
                 };
             });
-            
+
             modal.style.display = 'block';
         }
 
@@ -767,7 +1387,7 @@
             document.getElementById('occupancy-percent').textContent = `${busyPercent}%`;
             document.getElementById('prog-busy').style.width = `${busyPercent}%`;
             document.getElementById('prog-free').style.width = `${100 - busyPercent}%`;
-            
+
             // Display the time - it's already a formatted string from Python
             if (data.last_updated) {
                 document.getElementById('last-update').textContent = data.last_updated;
@@ -778,20 +1398,68 @@
             }
         }
 
+        // --- Live Stream Functions ---
+        let streamVisible = false;
+        const liveStreamSection = document.getElementById('live-stream-section');
+        const liveStreamImg = document.getElementById('live-stream-img');
+        const streamTimeEl = document.getElementById('stream-time');
+        const noStreamMsg = document.getElementById('no-stream-message');
+        const toggleStreamBtn = document.getElementById('toggle-stream-btn');
+
+        function updateLiveStream(streamData) {
+            if (streamData && streamData.frame && streamData.enabled) {
+                // Show stream section if hidden
+                if (!streamVisible) {
+                    liveStreamSection.style.display = 'block';
+                    streamVisible = true;
+                }
+
+                // Update image
+                liveStreamImg.src = 'data:image/jpeg;base64,' + streamData.frame;
+                liveStreamImg.style.display = 'block';
+                noStreamMsg.style.display = 'none';
+
+                // Update time
+                if (streamData.last_updated) {
+                    streamTimeEl.textContent = streamData.last_updated;
+                }
+            } else {
+                // No stream available
+                if (streamVisible) {
+                    liveStreamImg.style.display = 'none';
+                    noStreamMsg.style.display = 'block';
+                }
+            }
+        }
+
+        toggleStreamBtn.addEventListener('click', function () {
+            const streamContainer = document.getElementById('live-stream-container');
+            const isHidden = streamContainer.style.display === 'none';
+
+            if (isHidden) {
+                streamContainer.style.display = 'block';
+                toggleStreamBtn.innerHTML = '<i class="fas fa-eye-slash"></i> <span data-i18n="hide-stream">' + translations[currentLang]['hide-stream'] + '</span>';
+            } else {
+                streamContainer.style.display = 'none';
+                toggleStreamBtn.innerHTML = '<i class="fas fa-eye"></i> <span data-i18n="show-stream">' + translations[currentLang]['show-stream'] + '</span>';
+            }
+        });
+
         // --- Firebase Listener ---
         database.ref('parking').on('value', (snapshot) => {
             const data = snapshot.val();
             console.log('Firebase data received:', data); // لتتبع البيانات
             if (data && data.spaces) {
                 const spacesList = Array.isArray(data.spaces) ? data.spaces : Object.values(data.spaces || {});
+                lastSpaces = spacesList; // Update local cache
                 console.log(`✓ تم استقبال ${spacesList.length} موقف من Firebase`);
                 console.log(`📊 حالات المواقف:`, spacesList.map(s => ({ id: s.id, status: s.status })).slice(0, 10));
-                
+
                 // حساب المواقف الفارغة والمشغولة
                 const freeCount = spacesList.filter(s => s.status && s.status.toUpperCase() === 'FREE').length;
                 const occupiedCount = spacesList.filter(s => s.status && s.status.toUpperCase() === 'OCCUPIED').length;
                 console.log(`✓ Free: ${freeCount}, Occupied: ${occupiedCount}`);
-                
+
                 renderSmartMap(spacesList);
                 updateStats({
                     total_spaces: data.total_spaces || spacesList.length,
@@ -800,6 +1468,11 @@
                     last_updated: data.last_updated || Date.now() / 1000, // Use current time if not provided
                     timestamp: data.timestamp
                 });
+
+                // Update live stream if available
+                if (data.live_stream) {
+                    updateLiveStream(data.live_stream);
+                }
             } else {
                 console.warn('⚠️ لم يتم استقبال بيانات من Firebase');
                 containerEl.innerHTML = `<h3 style="text-align:center; width:100%; color: var(--danger-color);">⚠️ لم تتلقَّ بيانات من النظام</h3>`;
@@ -813,4 +1486,5 @@
         changeLanguage(currentLang);
     </script>
 </body>
+
 </html>
